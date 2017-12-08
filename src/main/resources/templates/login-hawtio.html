@@ -1,0 +1,13 @@
+<div ng-controller="LoginPlugin.LoginController">
+    <form action="/login" method="post">
+        <div><label>User Name: <input id="username" type="text" name="username"
+                                      required ng-model="entity.username"/>
+        </label></div>
+        <div><label>Password: <input id="password" type="password"
+                                     name="password" required
+                                     ng-model="entity.password"/> </label>
+        </div>
+        <div><input type="submit" value="Sign In"/></div>
+    </form>
+
+</div>
