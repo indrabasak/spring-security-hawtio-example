@@ -1,6 +1,6 @@
 [![Build Status][travis-badge]][travis-badge-url]
 
-![](./img/hawtio_logo.png)
+![](./img/hawtio-logo.png)
 
 Spring Security Hawtio Example
 =============================================
