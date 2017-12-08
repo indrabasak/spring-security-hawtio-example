@@ -59,8 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 ```   
 
 #### Login Page
-- Since you are using a form login, you will be leading a custom login page. In this
-example, a `login.html` is used.
+- Since you are using a form login, you will be needing a custom login page. 
+In this example, a `login.html` is used.
 
 - Configure the `/login` request to match view `login.html`
 ```java
@@ -77,9 +77,9 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 ```
 
 #### Updating hawtio's login.html 
-Once you log out from the hawtio page, it takes to its own login page. Since it's
-a single page application with AngularJS, you need to replace this partial page
-with your custom AngularJS based login page.
+Once you log out from the hawtio page, it takes you to its own login page. Since it's
+a single page application with AngularJS, you will need to replace this partial page
+with your own custom AngularJS based login page.
 
 - In this example, a `login-hawtio.html` page is used.
 ```html
