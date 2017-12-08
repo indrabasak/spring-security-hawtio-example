@@ -1,13 +1,24 @@
 <div ng-controller="LoginPlugin.LoginController">
-    <form action="/login" method="post">
-        <div><label>User Name: <input id="username" type="text" name="username"
-                                      required ng-model="entity.username"/>
-        </label></div>
-        <div><label>Password: <input id="password" type="password"
-                                     name="password" required
-                                     ng-model="entity.password"/> </label>
-        </div>
-        <div><input type="submit" value="Sign In"/></div>
-    </form>
 
+    <h1 style="color: #78ab46;">Sign in</h1>
+
+    <form action="/login" method="post">
+        <div>
+            <label style="font-weight: 700; padding-right: 15px;
+            padding-left: 15px;">Username:
+                <input id="username" type="text" name="username"
+                       placeholder="Username"/>
+            </label>
+        </div>
+        <div><label style="font-weight: 700; padding-right: 15px;
+        padding-left: 15px;">Password:
+            <input id="password" type="password" name="password" required
+                   placeholder="Password"/>
+        </label>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-default">Sign In</button>
+        </div>
+    </form>
 </div>
+
