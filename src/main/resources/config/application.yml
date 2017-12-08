@@ -29,8 +29,8 @@ jpa:
 #  level:
 #    org.springframework: DEBUG
 
-hawtio:
-  authenticationEnabled: false
+#hawtio:
+#  authenticationEnabled: false
 
 management:
   security:
