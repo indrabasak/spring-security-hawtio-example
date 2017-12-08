@@ -9,12 +9,11 @@ hawtio is a dashboard for managing and monitoring JVM related services.
 
 ### Changes Needed
 
-#### Spring Security 
+#### Configure Spring Security 
 Configure Spring security for application in a standard way except for 
 a few changes specfic to hawtio:
 
-- Disable hawthio authentication by declaring the following line before
-you start your application,
+- Disable default hawtio authentication,
 
 ```java
 @SpringBootApplication
@@ -32,7 +31,7 @@ public class Application {
 
 - Disable Cross-Site Request Forgery (CSRF) in your application.
 
-- Mkae sure the logout request URL matches the `/hawtio/auth/logout/*`.
+- Make sure the logout request URL matches the `/hawtio/auth/logout/*`.
 This is the URL used by hawtio to invalidate a session.
 
 ```java
@@ -78,8 +77,8 @@ public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
 ```
 
 #### Updating hawtio's login.html 
-Once you logout from the hawtio page, it takes to its own login page. Since it's
-a single page application with AngularJS, you need to relace this partial page
+Once you log out from the hawtio page, it takes to its own login page. Since it's
+a single page application with AngularJS, you need to replace this partial page
 with your custom AngularJS based login page.
 
 - In this example, a `login-hawtio.html` page is used.
@@ -141,9 +140,9 @@ public class HawtioController {
 ```
 
 #### hawtio Login Plugin
-A custom hawtio plugin is needed to have your own AngularJS login controller,
+- A custom hawtio plugin is needed to have your own AngularJS login controller,
 `LoginPlugin.LoginController`. It's used for redirecting to hawtio's home 
-page after you log in from hawto's login page.
+page after you are logged in in from hawto's login page.
 
 ```java
 @Configuration
@@ -161,6 +160,53 @@ public class HawtioConfiguration {
                 new String[]{"plugin/js/login-plugin.js"});
     }
 }
+```
+
+- The `login-plugin.js` is located under `resources/app/webapp/plugin/js` folder.
+
+```js
+var LoginPlugin = (function(LoginPlugin) {
+
+    LoginPlugin.pluginName = 'login-plugin';
+    LoginPlugin.log = Logger.get('LoginPlugin');
+    LoginPlugin.contextPath = "/hawtio/plugins/";
+    LoginPlugin.templatePath = LoginPlugin.contextPath + "login-plugin/html/";
+
+    LoginPlugin.module = angular.module('login-plugin', ['hawtioCore'])
+        .config(function($routeProvider) {
+            $routeProvider.
+            when('/home', {
+                templateUrl: '/hawtio/index.html'
+            });
+        });
+
+    LoginPlugin.module.run(function(workspace, viewRegistry, layoutFull) {
+
+        LoginPlugin.log.info(LoginPlugin.pluginName, " loaded");
+        viewRegistry["login-plugin"] = layoutFull;
+        workspace.topLevelTabs.push({
+            id: "LoginPlugin",
+            content: "Login Plugin",
+            title: "Login plugin loaded dynamically",
+            isValid: function(workspace) { return true; },
+            href: function() { return "#/login-plugin"; },
+            isActive: function(workspace) {
+                return workspace.isLinkActive("login-plugin"); }
+
+        });
+
+    });
+
+    LoginPlugin.LoginController = function($scope, $rootScope, $http) {
+        var fullUrl = "/hawtio/index.html";
+        $http({method: 'GET', url: fullUrl});
+    };
+
+    return LoginPlugin;
+
+})(LoginPlugin || {});
+
+hawtioPluginLoader.addModule(LoginPlugin.pluginName);
 ```
 
 ### Build
