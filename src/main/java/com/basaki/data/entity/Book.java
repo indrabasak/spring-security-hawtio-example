@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
  * <p/>
  *
  * @author Indra Basak
- * @since 11/23/17
+ * @since 12/7/17
  */
 @Entity
 @Table(name = "book")

@@ -6,10 +6,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * {@code SecurityConfiguration} configures Spring security with in memory
+ * authentication.
+ * <p/>
+ *
+ * @author Indra Basak
+ * @since 12/7/17
+ */
 @Configuration
 @EnableWebSecurity
 @Slf4j
@@ -20,22 +26,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             Exception {
         auth.inMemoryAuthentication().withUser("user").password(
                 "password").roles("USER");
+        auth.inMemoryAuthentication().withUser("admin").password(
+                "password").roles("USER");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-        http.authorizeRequests().antMatchers("/",
-                "/hawtio").permitAll().anyRequest().authenticated()
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .failureUrl("/login?error")
-/*                .successHandler(
-                        (request, response, authentication) -> {
-                            redirectStrategy.sendRedirect(
-                                    request, response,
-                                    "/hawtio/index.html");
-                        })*/
                 .permitAll()
                 .and().logout().logoutRequestMatcher(
                 new AntPathRequestMatcher(

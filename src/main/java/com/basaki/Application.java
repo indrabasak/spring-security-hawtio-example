@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * <p/>
  *
  * @author Indra Basak
- * @since 11/15/17
+ * @since 12/7/17
  */
 @SpringBootApplication
 @EnableHawtio

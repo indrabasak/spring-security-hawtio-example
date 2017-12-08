@@ -4,7 +4,7 @@
 
 Spring Security Hawtio Example
 =============================================
-This is an example of Spring security with Spring Boot and [hawtio](http://hawt.io/).
+This is an example of configuring Spring security with Spring Boot and [hawtio](http://hawt.io/).
 
 ### Build
 To build the JAR, execute the following command from the parent directory:

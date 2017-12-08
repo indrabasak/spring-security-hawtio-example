@@ -4,7 +4,6 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * <p/>
  *
  * @author Indra Basak
- * @since 11/23/17
+ * @since 12/7/17
  */
 @Configuration
 @EnableJpaRepositories(basePackages = {"com.basaki.data.repository"})
@@ -24,11 +23,9 @@ public class DataConfiguration {
     @Bean
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase datasource = builder
+        return builder
                 .setType(EmbeddedDatabaseType.HSQL)
                 .addScript("db/create-db.sql")
                 .build();
-
-        return datasource;
     }
 }

@@ -15,6 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import springfox.documentation.annotations.ApiIgnore;
 
+/**
+ * {@code HawtioController} replaces Hawtion login html with custom angular
+ * login html.
+ * <p/>
+ *
+ * @author Indra Basak
+ * @since 12/7/17
+ */
 @Controller
 @Slf4j
 @ApiIgnore
@@ -34,7 +42,6 @@ public class HawtioController {
         try {
             String body = getResource(location);
             response.setStatus(HttpStatus.OK.value());
-            //response.setHeader("Content-Type", "text/html;charset=UTF-8");
             response.getWriter().write(body);
             response.getWriter().flush();
             response.getWriter().close();
@@ -44,9 +51,9 @@ public class HawtioController {
     }
 
     /**
-     * Looks for a resource at different locations in order of preference.
+     * Looks for a resource in classpath.
      *
-     * @return input stream of the resource, null if not found
+     * @return the resource as a string
      */
     private String getResource(String location) throws IOException {
         InputStream istream;
