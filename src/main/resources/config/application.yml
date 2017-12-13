@@ -40,3 +40,10 @@ management:
 #  basic:
 #    enable: true
 #  ignored: /**
+
+camel:
+  api:
+    path: '/camel'
+  springboot:
+    # The Camel context name
+    name: ServicesRest
