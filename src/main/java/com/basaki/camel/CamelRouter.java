@@ -41,6 +41,7 @@ public class CamelRouter extends RouteBuilder {
                 .dataFormatProperty("prettyPrint", "true");
 
         createPostRoute();
+        createGetRoute();
     }
 
     private void createPostRoute() {
@@ -67,5 +68,16 @@ public class CamelRouter extends RouteBuilder {
                     }
                 })
                 .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(201));
+    }
+
+    private void createGetRoute() {
+        rest("/ping").description("Camel Ping Endpoint")
+                .id("ping-route")
+                .get()
+                .produces(MediaType.APPLICATION_JSON)
+                .to("direct:ping");
+
+        from("direct:ping")
+                .transform().constant("pong");
     }
 }
