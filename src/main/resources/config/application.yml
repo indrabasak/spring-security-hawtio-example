@@ -32,6 +32,14 @@ jpa:
 #hawtio:
 #  authenticationEnabled: false
 
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web:
+#          filter:
+#            CommonsRequestLoggingFilter: DEBUG
+
 management:
   security:
     enabled: false

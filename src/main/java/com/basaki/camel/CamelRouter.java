@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
- * {@code CamelRouteService} creates Camel routes.
+ * {@code CamelRouter} creates Camel routes.
  * <p/>
  *
  * @author Indra Basak
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  */
 @Configuration
 @Component
-public class CamelRouteService extends RouteBuilder {
+public class CamelRouter extends RouteBuilder {
 
     @Value("${server.port}")
     private String serverPort;
