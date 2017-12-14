@@ -68,6 +68,7 @@ public class MultiSecurityConfiguration {
             web.ignoring().antMatchers("/resources/static/**");
             web.ignoring().antMatchers("/webjars/**");
             web.ignoring().antMatchers("/css/**");
+            web.ignoring().antMatchers("/jolokia/**");
         }
     }
 }
